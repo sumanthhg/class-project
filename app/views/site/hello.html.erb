@@ -1,0 +1,19 @@
+<h2><%= @message %></h2>
+<%# another_message %>
+
+2 + 2 = 
+<%= 2 + 2 %>
+
+<% names = ["suresh", "ramesh", "veeresh"] %>
+
+<h3>Listing Names</h3>
+<ul>
+	<% names.each do |name| %>
+		<li><%= name.upcase %></li>
+	<% end %>
+</ul>
+
+<br/>
+<%= link_to "Tell Goodbye", site_goodbye_path %>
+<br/>
+<a href="/site/goodbye">Say Goodbye</a>
