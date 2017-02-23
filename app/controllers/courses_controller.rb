@@ -1,12 +1,18 @@
 class CoursesController < ApplicationController
 
+  load_and_authorize_resource 
+
   before_action :authenticate_user!, only: [:edit, :new, :destroy]
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    if (!current_user.nil?) && (current_user.role? "trainer") 
+      @courses = current_user.courses # Course.where('user_id = ?', current_user.id)
+    else 
+      @courses = Course.all 
+    end
   end
 
   # GET /courses/1
@@ -27,7 +33,7 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-
+    @course.user_id = current_user.id
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
@@ -42,6 +48,7 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    @course.user_id = current_user.id
     respond_to do |format|
       if @course.update(course_params)
         format.html { redirect_to @course, notice: 'Course was successfully updated.' }

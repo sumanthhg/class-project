@@ -4,8 +4,25 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gender %><br />
+    <%= f.radio_button :gender, "male" %> Male 
+    <%= f.radio_button :gender, "female" %> Female 
+  </div>
+
+  <div class="field">
+    <%= f.label :register_as %><br />
+    <%= f.radio_button :role, "student" %> Student 
+    <%= f.radio_button :role, "trainer" %> Trainer 
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email %>
   </div>
 
   <div class="field">
@@ -20,6 +37,8 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+
+
 
   <div class="actions">
     <%= f.submit "Sign up" %>

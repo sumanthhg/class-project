@@ -1,8 +1,10 @@
 class SiteController < ApplicationController
 
   def hello
-  	@message = "Hello World"
-  	another_message = "NOt visible"
+  	@master_categories = MasterCategory.all
+  	@categories = Category.all 
+  	@top_course = Course.find(1)
+  	@courses = Course.all 
   end
 
   def goodbye

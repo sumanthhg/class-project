@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get 'site/home'
+
+  get 'site/contact'
+
+  devise_for :users, controllers: { registrations: "registrations"}
   resources :courses
 
   get 'site/hello'

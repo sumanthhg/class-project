@@ -1,19 +1,44 @@
-<h2><%= @message %></h2>
-<%# another_message %>
-
-2 + 2 = 
-<%= 2 + 2 %>
-
-<% names = ["suresh", "ramesh", "veeresh"] %>
-
-<h3>Listing Names</h3>
-<ul>
-	<% names.each do |name| %>
-		<li><%= name.upcase %></li>
+<h2>Listing Master Categories</h2>
+		
+	<% @master_categories.each do |master_category| %>
+		<h4><%= master_category.name %> </h4>
+		<ol>
+			<% Category.where('master_category_id = ?', master_category.id).each do |category| %>
+				<li><%= category.name %></li>
+			<% end %>
+		</ol>
 	<% end %>
-</ul>
 
-<br/>
-<%= link_to "Tell Goodbye", site_goodbye_path %>
-<br/>
-<a href="/site/goodbye">Say Goodbye</a>
+<h2>Listing Master Categories via association</h2>		
+	<% @master_categories.each do |master_category| %>
+		<h4><%= master_category.name %> (<%= master_category.categories.count %> )</h4>
+		<ol>
+			<% master_category.categories.each do |category| %>
+				<h5><%= category.name %> (<%= category.courses.count %>)</h5>
+				<ul>
+					<% category.courses.each do |course| %>
+						<li><%= course.name %></li>
+					<% end %>
+				</ul>
+			<% end %>
+		</ol>
+	<% end %>
+
+<h2>Listing Categories (<%= @categories.count %>)</h2>
+<ol>
+	<% @categories.each do |category| %>
+		<li><%= category.name %></li>
+	<% end %>
+</ol>
+
+
+<h2>Listing Courses (<%= @courses.count %>) </h2>
+<ol>
+	<% @courses.each do |course| %>
+		<li><%= course.name %> </li>
+	<% end %>
+</ol>
+
+
+
+<h2>Top Course <%= @top_course.name %> </h2>
