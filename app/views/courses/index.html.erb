@@ -2,10 +2,11 @@
 
 <h1>Listing Courses (<%= @courses.length %>)</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Catregory Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,13 +15,23 @@
     <% @courses.each do |course| %>
       <tr>
         <td><%= course.name %></td>
+        
+        <%if !course.category.nil? %> <!-- unless -->
+        <td><%= link_to course.category.try(:name), category_path(course.category) %></td>
+        <%else%>
+        <td>No Catregory</td>
+        <%end%>
+
         <td><%= link_to 'Show', course %></td>
+       
         <% if can? :update, course %>
           <td><%= link_to 'Edit', edit_course_path(course) %></td>
         <% end %>
+       
         <% if can? :destroy, course %>
          <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+     
       </tr>
     <% end %>
   </tbody>
@@ -29,5 +40,7 @@
 <br>
 
 <% if can? :create, Course.new %>
-  <%= link_to 'New Course', new_course_path %>
+  <%= link_to new_course_path, class: "btn btn-primary" do %>
+  <i class="glyphicon glyphicon-plus"></i>Add New Course
+  <%end%>
 <% end %>

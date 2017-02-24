@@ -5,4 +5,6 @@ class Category < ActiveRecord::Base
 	# option for method : (colon) after ex - dependent: 
 	# value for the option : (colon) before  ex - :destroy 
 
+	validates_presence_of :name, message: "You should give a name"
+    validates_numericality_of :master_category_id, message: "id is mandatory"
 end

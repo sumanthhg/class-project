@@ -1,8 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+
+<div class="container">
 <p>
   <strong>Name:</strong>
   <%= @course.name %>
+</p>
+
+<p>
+  <strong>Category Name:</strong>
+  <%= link_to @course.category.name, category_path(@course.category)%>
+</p>
+
+<p>
+<strong>Trainer Name:</strong>
+<% if (!@course.user.nil?) && (!@course.user.profile.nil?)%>
+<%= link_to @course.user.first_name, profile_path(@course.user.profile) %>
+<%end%>
 </p>
 
 <% if can? :update, @course %>
@@ -10,3 +24,4 @@
 <% end %>
 
 <%= link_to 'Back', courses_path %>
+</div>

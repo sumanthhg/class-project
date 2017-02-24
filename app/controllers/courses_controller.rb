@@ -3,13 +3,13 @@ class CoursesController < ApplicationController
   load_and_authorize_resource 
 
   before_action :authenticate_user!, only: [:edit, :new, :destroy]
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show]
 
   # GET /courses
   # GET /courses.json
   def index
     if (!current_user.nil?) && (current_user.role? "trainer") 
-      @courses = current_user.courses # Course.where('user_id = ?', current_user.id)
+      @courses = Course.all  # Course.where('user_id = ?', current_user.id)
     else 
       @courses = Course.all 
     end
@@ -27,13 +27,16 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    @course = current_user.courses.find(params[:id])
   end
 
   # POST /courses
   # POST /courses.json
   def create
     @course = Course.new(course_params)
+
     @course.user_id = current_user.id
+
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
@@ -78,6 +81,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name)
+      params.require(:course).permit(:name,:category_id)
     end
 end

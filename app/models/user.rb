@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :permissions
   has_many :roles, through: :permissions
+  has_one :profile
 
   after_create :create_permission
 

@@ -8,9 +8,10 @@ gem 'sqlite3'
 gem 'pry'
 
 gem 'cancancan'
-
+gem 'faker'
 gem 'devise','~>3.3.0'
-
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'bootstrap-datepicker-rails'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

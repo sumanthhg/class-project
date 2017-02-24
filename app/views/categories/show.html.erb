@@ -1,0 +1,21 @@
+<h2><%= @category.name%></h2>
+
+<%if @category.courses.empty?%>
+	
+	<p>No course found for this category</p>
+
+	<%else%>
+	<ol>
+	
+	<% @category.courses.each do |course|%>
+     	<li><%= link_to course.name, course_path(course)%></li>
+	<%end%>
+    
+    </ol>
+<%end%>
+
+<%if (user_signed_in?) && (can? :destroy, @category )%>
+<%= link_to 'Destroy', categories_path(@category), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%end%>
+
+<%= link_to 'Back', categories_path %>

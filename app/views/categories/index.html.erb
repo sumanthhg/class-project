@@ -1,0 +1,35 @@
+<h2>List of Category</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Master Category</th>
+
+		</tr>
+<tbody>
+	
+<%@categories.each do |category|%>
+
+<tr>
+    <td><%=link_to category.name, category_path(category) %></td>
+	<td><%= category.master_category.try(:name) %></td>
+	<%if (user_signed_in? && (can? :update,category))%>
+	 <td><%= link_to 'Edit', edit_category_path(category) %></td>
+	 <%end%>
+</tr>
+<%end%>
+
+</tbody>
+
+
+	</thead>
+
+
+
+</table>
+<br/>
+<%if (user_signed_in?) && (can? :create, Category.new)%>
+<%= link_to 'Add', new_category_path %>
+    
+    <%end%>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :products
+
+  resources :profiles
+
    resources :categories
   get 'site/home'
 
