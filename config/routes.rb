@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+   resources :categories
   get 'site/home'
 
   get 'site/contact'
